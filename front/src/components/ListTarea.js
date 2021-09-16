@@ -7,7 +7,7 @@ const HOST_API = "http://localhost:8080/api";
 const ListTarea = () => {
     const { dispatch, state: { todo } } = useContext(Store);
     const currentList = todo.list;
-    console.log(currentList);
+    const currentListTareas= currentList.filter(tarea => tarea.groupListId == null)
 
     useEffect(() => {
         fetch(HOST_API + "/todos")
@@ -55,18 +55,21 @@ const ListTarea = () => {
     return <div>
 
         {/* Filter de las tareas que no tienen id relacionado (Tareas)*/}
-        {currentList.map((todo) => {
+
+
+        {currentListTareas.map((todo) => {
             return (
                 <>
 
-                    <p>{todo.id}</p>
-                    <p>{todo.name}---- Tarea principal----</p> 
-                    <FormSubtarea idTarea={todo.id} />
-                    <p>Lista subTareas</p>
-                    <ListSubTarea idTarea={todo.id}/>
-                    <p>Lista subTareas</p>
-
-
+                <div class="card">
+                    <h5 class="card-header">{todo.name}</h5>
+                        <div class="card-body">
+                        <FormSubtarea idTarea={todo.id} />
+                        <p>Lista subTareas</p>
+                        <ListSubTarea idTarea={todo.id}/>
+                    </div>
+                    
+                </div>
 
                 </>
             )
