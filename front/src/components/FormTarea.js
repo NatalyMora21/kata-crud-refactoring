@@ -10,7 +10,7 @@ const FormTarea = () => {
     const { dispatch, state: { todo } } = useContext(Store);
     const item = todo.item;
     const [state, setState] = useState(item);
-    
+
 
     //Crear nueva tarea
     const onAdd = (event) => {
@@ -40,16 +40,19 @@ const FormTarea = () => {
     return (
         <>
             <form ref={formRef}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Nueva lista de To-DO"
-                    defaultValue={item.name}
-                    onChange={(event) => {
-                        setState({ ...state, name: event.target.value })
-                    }}  ></input>
-
-                {<button onClick={onAdd}>Nueva Tarea</button>}
+                <div className="mb-3">
+                    <input class="form-control"
+                        type="text"
+                        name="name"
+                        placeholder="Nueva lista de To-DO"
+                        defaultValue={item.name}
+                        onChange={(event) => {
+                            setState({ ...state, name: event.target.value })
+                        }}  ></input>
+                </div>
+                <div className="mb-3">
+                    {<button onClick={onAdd} class="btn btn-outline-info">Nueva Tarea</button>}
+                </div>
             </form>
         </>
     )
