@@ -1,11 +1,10 @@
-import React, {createContext,useReducer} from 'react'
+import React, {createContext,useReducer} from 'react';
 
 const initialState = {
     todo: { list: [], item: {} }
   };
 
 export const Store = createContext(initialState);
-
 
 function reducer(state, action) {
     switch (action.type) {
