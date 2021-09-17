@@ -11,6 +11,8 @@ const FormTarea = () => {
     const item = todo.item;
     const [state, setState] = useState(item);
 
+    const [showform, setShowform] = useState(false);
+
 
     //Crear nueva tarea
     const onAdd = (event) => {
@@ -38,22 +40,33 @@ const FormTarea = () => {
     }
 
     return (
+
         <>
-            <form ref={formRef}>
-                <div className="mb-3">
-                    <input class="form-control"
-                        type="text"
-                        name="name"
-                        placeholder="Nueva lista de To-DO"
-                        defaultValue={item.name}
-                        onChange={(event) => {
-                            setState({ ...state, name: event.target.value })
-                        }}  ></input>
-                </div>
-                <div className="mb-3">
-                    {<button onClick={onAdd} class="btn btn-outline-info">Nueva Tarea</button>}
-                </div>
-            </form>
+            <div className="mb-3">
+                <button onClick={() => { setShowform(!showform) }} className="btn btn-primary">Agegar Tarea {showform ? <i class="fas fa-minus icon-more"></i> : <i class="fas fa-plus icon-more"></i>}</button>
+            </div>
+            < div className="content-form">
+
+
+
+                {showform &&
+                    <form ref={formRef}>
+                        <div className="mb-2">
+                            <input class="form-control"
+                                type="text"
+                                name="name"
+                                placeholder="Nueva lista de To-DO"
+                                defaultValue={item.name}
+                                onChange={(event) => {
+                                    setState({ ...state, name: event.target.value })
+                                }}  ></input>
+                        </div>
+
+                        <button onClick={onAdd} className="btn btn-primary save">Guardar </button>
+                    </form>
+                }
+
+            </ div>
         </>
     )
 }

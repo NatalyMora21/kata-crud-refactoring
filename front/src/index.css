@@ -11,3 +11,68 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.icon-done{
+  color: #63ebb3;
+}
+.icont-notdone{
+
+  color: #DEDFE0;
+
+}
+
+* {
+
+  font-family: 'Quicksand', sans-serif;
+
+}
+
+h1{
+  margin: 15px 0 30px 30px;
+}
+
+.gestion{
+  margin: 40px;
+}
+
+.fotoperfil {
+  width: 100px;
+  height: 100;
+}
+
+button{
+  background: #8399ca;
+}
+
+.icon-more {
+  margin-left:10px
+}
+
+.content-form{
+  margin: 20px 0px 30px 10px;
+}
+
+.save {
+  background-color: #41d1cc;
+  border: #41d1cc;
+}
+
+.agregar-sub {
+  margin: 10px 0 30px 0;
+}
+
+.add-icon{
+  color: #15aabf;
+  font-size: 21px;
+  padding-left: 10px;
+
+}
+
+.name-todo {
+  padding: 13px;
+}
+
+.delete-tarea{
+  font-size: 12px;
+  color: #183052;
+}

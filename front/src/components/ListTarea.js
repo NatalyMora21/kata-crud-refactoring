@@ -62,10 +62,9 @@ const ListTarea = () => {
                 <>
 
                 <div class="card">
-                    <h5 class="card-header">{todo.name}</h5>
+                    <h5 class="card-header name-todo">{todo.name} <i class="far fa-trash-alt delete-tarea" onClick={() => onDelete(todo.id)}></i></h5>
                         <div class="card-body">
                         <FormSubtarea idTarea={todo.id} />
-                        <p>Lista subTareas</p>
                         <ListSubTarea idTarea={todo.id}/>
                     </div>
                     

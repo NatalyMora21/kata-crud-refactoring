@@ -10,6 +10,7 @@ const FormSubtarea = (props) => {
     const { dispatch, state: { todo } } = useContext(Store);
     const item = todo.item;
     const [state, setState] = useState(item);
+    const [showform, setShowform] = useState(false);
 
     //Crear nueva tarea
     const onAdd = (event) => {
@@ -48,7 +49,8 @@ const FormSubtarea = (props) => {
         const request = {
             name: state.name,
             id: item.id,
-            isCompleted: item.isCompleted
+            isCompleted: item.isCompleted,
+            groupListId: props.idTarea
         };
 
 
@@ -69,24 +71,29 @@ const FormSubtarea = (props) => {
 
     return (
 
-        <form ref={formRef}>
-            <p>SUBTAREAS -FORM</p>
-            <div class="mb-3">
-                <input
-                    class="form-control"
-                    type="text"
-                    name="name"
-                    placeholder="¿Qué piensas hacer hoy?"
-                    defaultValue={item.name}
-                    onChange={(event) => {
-                        setState({ ...state, name: event.target.value })
-                    }}  ></input>
+        <>
+            <div className="agregar-sub">
+                <p>Agregar {showform ? <i class="fas fa-minus-circle fa-2x add-icon" onClick={() => { setShowform(!showform) }}> </i> :<i class="fas fa-plus-circle fa-2x add-icon" onClick={() => { setShowform(!showform) }}></i>}</p>
             </div>
-            <div class="mb-3">
-                {item.id && <button onClick={onEdit} class="btn btn-outline-info">Actualizar</button>}
-                {!item.id && <button onClick={onAdd} class="btn btn-outline-success" >Crear Subtarea +</button>}
-            </div>
-        </form>
+            {showform && <form ref={formRef}>
+                <div className="mb-2">
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="name"
+                        placeholder="¿Qué piensas hacer hoy?"
+                        defaultValue={item.name}
+                        required
+                        onChange={(event) => {
+                            setState({ ...state, name: event.target.value })
+                        }}  ></input>
+                </div>
+                
+                    {item.id && <button onClick={onEdit} class="btn btn-primary save">Actualizar</button>}
+                    {!item.id && <button onClick={onAdd} class="btn btn-primary save" >Enviar +</button>}
+           
+            </form>}
+        </>
     )
 }
 

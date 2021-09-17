@@ -4,13 +4,19 @@ import FormTarea from './components/FormTarea'
 import ListTarea from './components/ListTarea'
 import FormSubtarea from './components/FormSubtarea';
 
+import img from './perfil.png'
+
 
 function App() {
   return <StoreProvider>
-    <h3>To-Do List</h3>
-    <FormTarea />
-    {/* Lista solo las tareas Tareas */}
-    <ListTarea />
+    <img className="fotoperfil" src={img} />
+    <h1>Mis tareas</h1>
+    <div className="gestion">
+      <h3 className="mb-3">Gestione sus tareas</h3>
+      <FormTarea />
+      {/* Lista solo las tareas Tareas */}
+      <ListTarea />
+    </div>
    
   </StoreProvider>
 
