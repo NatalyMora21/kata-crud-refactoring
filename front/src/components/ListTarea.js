@@ -9,6 +9,7 @@ const ListTarea = () => {
     const currentList = todo.list;
     const currentListTareas= currentList.filter(tarea => tarea.groupListId == null)
 
+
     useEffect(() => {
         fetch(HOST_API + "/todos")
             .then(response => response.json())
@@ -23,8 +24,25 @@ const ListTarea = () => {
             method: "DELETE"
         }).then((list) => {
             dispatch({ type: "delete-item", id })
+            const currentListSubTareas = currentList.filter(tarea => tarea.groupListId != null && tarea.groupListId == id)
+
+            currentListSubTareas.forEach(element => {
+                console.log(element.id)
+                onDeletesubtares(element.id)
+            });
+
         })
     };
+
+
+    const onDeletesubtares = (id) => {
+        fetch(HOST_API + "/" + id + "/todo", {
+            method: "DELETE"
+        }).then((list) => {
+            dispatch({ type: "delete-item", id })
+        })
+    };
+
 
     const onEdit = (todo) => {
         dispatch({ type: "edit-item", item: todo })
@@ -59,18 +77,18 @@ const ListTarea = () => {
 
         {currentListTareas.map((todo) => {
             return (
-                <>
+          
 
-                <div class="card">
-                    <h5 class="card-header name-todo">{todo.name} <i class="far fa-trash-alt delete-tarea" onClick={() => onDelete(todo.id)}></i></h5>
+                <div class="card card-list">
+                    <h4 class="card-header name-todo">{todo.name} <i class="far fa-trash-alt delete-tarea" onClick={() => onDelete(todo.id)}></i></h4>
                         <div class="card-body">
-                        <FormSubtarea idTarea={todo.id} />
+                        <FormSubtarea idTarea={todo.id}  />
                         <ListSubTarea idTarea={todo.id}/>
                     </div>
                     
                 </div>
 
-                </>
+            
             )
         })}
 

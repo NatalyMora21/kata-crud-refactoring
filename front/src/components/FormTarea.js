@@ -1,5 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Store } from '../context/TodoContext';
+import { useForm } from 'react-hook-form'
+
 
 
 const HOST_API = "http://localhost:8080/api";
@@ -12,17 +14,18 @@ const FormTarea = () => {
     const [state, setState] = useState(item);
 
     const [showform, setShowform] = useState(false);
+    const [required, setRequired] = useState(false);
 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     //Crear nueva tarea
-    const onAdd = (event) => {
-        event.preventDefault();
+    const onAdd = (data, e) => {
+        e.preventDefault();
 
         const request = {
-            name: state.name,
+            name: data.name,
             id: null,
         };
-
         fetch(HOST_API + "/todo", {
             method: "POST",
             body: JSON.stringify(request),
@@ -35,10 +38,12 @@ const FormTarea = () => {
 
                 dispatch({ type: "add-item", item: todo });
                 setState({ name: "" });
-                formRef.current.reset();
+    
             });
-    }
 
+        setRequired(false);
+
+    }
     return (
 
         <>
@@ -46,25 +51,42 @@ const FormTarea = () => {
                 <button onClick={() => { setShowform(!showform) }} className="btn btn-primary">Agegar Tarea {showform ? <i class="fas fa-minus icon-more"></i> : <i class="fas fa-plus icon-more"></i>}</button>
             </div>
             < div className="content-form">
-
-
-
                 {showform &&
-                    <form ref={formRef}>
-                        <div className="mb-2">
-                            <input class="form-control"
-                                type="text"
-                                name="name"
-                                placeholder="Nueva lista de To-DO"
-                                defaultValue={item.name}
-                                onChange={(event) => {
-                                    setState({ ...state, name: event.target.value })
-                                }}  ></input>
-                        </div>
+                    <div className="card card-form">
 
-                        <button onClick={onAdd} className="btn btn-primary save">Guardar </button>
-                    </form>
+                        <div class="card-body">
+
+                            <form onSubmit={handleSubmit(onAdd)}>
+                                <input type="text" name="name" className="form-control" {...register('name', { required: true, message: "Campo requerido" })} />
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors.name?.type === 'required' && "El campo es requerido"}
+                                </span>
+
+                                <button className="btn btn-primary save">Guardar </button>
+                            </form>
+
+
+                            {/*<form ref={formRef}>
+                                <div className="mb-2">
+                                    <input class="form-control"
+                                        type="text"
+                                        name="name"
+                                        placeholder="Nueva lista de To-DO"
+                                        onChange={(event) => {
+                                            setState({ ...state, name: event.target.value })
+                                        }}  ></input>
+                                </div>
+<button onClick={onAdd} className="btn btn-primary save">Guardar </button>
+                                
+                            </form>*/}
+                        </div>
+                        {required && <p>El campo es obligatorio</p>}
+                    </div>
+
+
                 }
+
+
 
             </ div>
         </>

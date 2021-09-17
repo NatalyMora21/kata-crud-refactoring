@@ -28,16 +28,17 @@ code {
 }
 
 h1{
-  margin: 15px 0 30px 30px;
+  margin: 15px 0 30px 50px;
 }
 
 .gestion{
-  margin: 40px;
+  margin: 40px 80px 0 80px;
 }
 
 .fotoperfil {
   width: 100px;
   height: 100;
+  margin: 40px;
 }
 
 button{
@@ -69,10 +70,42 @@ button{
 }
 
 .name-todo {
-  padding: 13px;
+  padding: 18px;
+  font-size: 22px;
+
 }
 
 .delete-tarea{
   font-size: 12px;
   color: #183052;
+}
+
+.option-border {
+  border-bottom: 1px solid #F1619F;
+  margin-right: 10px;
+}
+
+body {
+  background-color: #19d9db;
+}
+
+.continer {
+  background-color: #F2F1F1;
+  margin: 30px;
+  border-radius: 40px;
+}
+
+.card-list{
+  margin-bottom: 10px;
+}
+
+.card-form {
+  padding: 30px;
+  border-radius: 8px;
+}
+.subForm {
+  border: 1px dashed ;
+  padding: 30px;
+
+
 }

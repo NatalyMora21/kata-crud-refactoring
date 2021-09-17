@@ -73,26 +73,32 @@ const FormSubtarea = (props) => {
 
         <>
             <div className="agregar-sub">
-                <p>Agregar {showform ? <i class="fas fa-minus-circle fa-2x add-icon" onClick={() => { setShowform(!showform) }}> </i> :<i class="fas fa-plus-circle fa-2x add-icon" onClick={() => { setShowform(!showform) }}></i>}</p>
+                <p>Agregar {showform ? <i class="fas fa-minus-circle fa-2x add-icon" onClick={() => { setShowform(!showform) }}> </i> : <i class="fas fa-plus-circle fa-2x add-icon" onClick={() => { setShowform(!showform) }}></i>}</p>
             </div>
-            {showform && <form ref={formRef}>
-                <div className="mb-2">
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="name"
-                        placeholder="¿Qué piensas hacer hoy?"
-                        defaultValue={item.name}
-                        required
-                        onChange={(event) => {
-                            setState({ ...state, name: event.target.value })
-                        }}  ></input>
+            {showform &&
+
+                <div className="card subForm">
+                    
+                    <form ref={formRef}>
+                        <div className="mb-2">
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="name"
+                                placeholder="¿Qué piensas hacer hoy?"
+                                defaultValue={item.name}
+                                required
+                                onChange={(event) => {
+                                    setState({ ...state, name: event.target.value })
+                                }}  ></input>
+                        </div>
+
+                        {item.id && <button onClick={onEdit} class="btn btn-primary save">Actualizar</button>}
+                        {!item.id && <button onClick={onAdd} class="btn btn-primary save" >Enviar +</button>}
+
+                    </form>
                 </div>
-                
-                    {item.id && <button onClick={onEdit} class="btn btn-primary save">Actualizar</button>}
-                    {!item.id && <button onClick={onAdd} class="btn btn-primary save" >Enviar +</button>}
-           
-            </form>}
+            }
         </>
     )
 }
