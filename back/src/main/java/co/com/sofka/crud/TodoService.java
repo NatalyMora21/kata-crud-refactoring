@@ -24,6 +24,7 @@ public class TodoService {
 
     public void delete(Long id){
         Todo todo = mappertodo.totodo(get(id));
+
         repository.delete(todo);
     }
 
